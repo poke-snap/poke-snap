@@ -71,6 +71,7 @@ class CameraScreen extends React.Component {
     pictureSizeId: 0,
     showGallery: false,
     showMoreOptions: false,
+    focusedScreen: true,
   };
 
   async componentDidMount() {
@@ -167,7 +168,7 @@ class CameraScreen extends React.Component {
 
     // Camera 
     if (permissionGranted === null) {
-      return <View />;
+      return <View><Text>Camera permission is awaiting response</Text></View>;
     }
     else if (!permissionGranted) {
       return <Text>No access to camera</Text>;
@@ -243,7 +244,7 @@ class CameraScreen extends React.Component {
       );
     }
     else {
-      return <View/>
+      return <View><Text>Camera is not focused</Text></View>
     }
   }
 }
