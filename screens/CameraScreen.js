@@ -9,6 +9,7 @@ import {
   View,
 
 } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
 import { Camera, Constants, FileSystem, Permissions, WebBrowser } from 'expo';
 import {
   Ionicons,
@@ -51,7 +52,7 @@ const wbIcons = {
   fluorescent: 'wb-iridescent',
   incandescent: 'wb-incandescent',
 };
-export default class CameraScreen extends React.Component {
+class CameraScreen extends React.Component {
   state = {
     flash: 'off',
     zoom: 0,
@@ -458,3 +459,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export default withNavigationFocus(CameraScreen);
