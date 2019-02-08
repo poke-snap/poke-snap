@@ -79,6 +79,14 @@ class CameraScreen extends React.Component {
     FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
       console.log(e, 'Directory exists');
     });
+
+    const { navigation } = this.props;
+    navigation.addListener('willFocus', () =>
+      this.setState({ focusedScreen: true })
+    );
+    navigation.addListener('willBlur', () =>
+      this.setState({ focusedScreen: false })
+    );
   }
 
   static navigationOptions = {
@@ -164,7 +172,7 @@ class CameraScreen extends React.Component {
     else if (!permissionGranted) {
       return <Text>No access to camera</Text>;
     }
-    else {
+    else if (this.state.focusedScreen) {
       return (
         <View style={{ flex: 1 }}>
           <Camera
@@ -233,6 +241,9 @@ class CameraScreen extends React.Component {
           </Camera>
         </View>
       );
+    }
+    else {
+      return <View/>
     }
   }
 }
