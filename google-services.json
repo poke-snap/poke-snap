@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "980159961900",
+    "firebase_url": "https://poke-snap.firebaseio.com",
+    "project_id": "poke-snap",
+    "storage_bucket": "poke-snap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980159961900:android:380c8fe751b899e4",
+        "android_client_info": {
+          "package_name": "com.poke_snap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980159961900-nq9nohrplc1piuq3c5n5jaiv9s4kshfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMzu7_Pdo_t3qyKY-RcphVzVwsRHEc5D0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
