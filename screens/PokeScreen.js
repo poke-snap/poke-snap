@@ -13,7 +13,7 @@ import { Permissions, Notifications } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-const PUSH_ENDPOINT = 'https://your-server.com/users/push-token';
+const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
 
 export default class PokeScreen extends React.Component {
   static navigationOptions = {
@@ -47,21 +47,26 @@ export default class PokeScreen extends React.Component {
 
     console.log(`[Token] ${token}`);
 
+    var formData = new FormData();
+    formData.append('expo-push-token', token);
+    formData.append('username', 'seanytak');
+
+    let formBody = [];
+    let encodedKey = encodeURIComponent('expo-push-token');
+    let encodedValue = encodeURIComponent(token);
+    formBody.push(encodedKey + "=" + encodedValue);
+    formBody = formBody.join("&");
+
     // POST the token to your backend server from where you can retrieve it to send push notifications.
     return fetch(PUSH_ENDPOINT, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
       body: JSON.stringify({
-        token: {
-          value: token,
-        },
-        user: {
-          username: 'Brent',
-        },
-      }),
+        username: 'seanytak'
+      })
     });
   }
 
