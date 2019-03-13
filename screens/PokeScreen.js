@@ -20,8 +20,6 @@ export default class PokeScreen extends React.Component {
     header: null,
   };
 
-
-
   registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(
       Permissions.NOTIFICATIONS
@@ -47,15 +45,15 @@ export default class PokeScreen extends React.Component {
 
     console.log(`[Token] ${token}`);
 
-    var formData = new FormData();
-    formData.append('expo-push-token', token);
-    formData.append('username', 'seanytak');
+    // var formData = new FormData();
+    // formData.append('expo-push-token', token);
+    // formData.append('username', 'seanytak');
 
-    let formBody = [];
-    let encodedKey = encodeURIComponent('expo-push-token');
-    let encodedValue = encodeURIComponent(token);
-    formBody.push(encodedKey + "=" + encodedValue);
-    formBody = formBody.join("&");
+    // let formBody = [];
+    // let encodedKey = encodeURIComponent('expo-push-token');
+    // let encodedValue = encodeURIComponent(token);
+    // formBody.push(encodedKey + "=" + encodedValue);
+    // formBody = formBody.join("&");
 
     // POST the token to your backend server from where you can retrieve it to send push notifications.
     return fetch(PUSH_ENDPOINT, {
@@ -65,7 +63,8 @@ export default class PokeScreen extends React.Component {
         'Content-Type': 'multipart/form-data',
       },
       body: JSON.stringify({
-        username: 'seanytak'
+        username: 'seanytak',
+        token: token,
       })
     });
   }

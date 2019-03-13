@@ -15,10 +15,15 @@ import { withNavigationFocus } from 'react-navigation';
 import { Constants, ImagePicker, Permissions } from 'expo';
 
 class CameraScreen extends Component {
-  state = {
-    image: null,
-    uploading: false,
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null,
+      username: '',
+      uploading: false,
+    };
+  }
 
   render() {
     let {
@@ -29,17 +34,21 @@ class CameraScreen extends Component {
       <View style={styles.container}>
         <StatusBar barStyle="default" />
 
-        <Text
+        {/* <Text
           style={styles.exampleText}>
           Example: Upload ImagePicker result
-        </Text>
+        </Text> */}
 
-        <Button
+        {/* <Button
           onPress={this._pickImage}
           title="Pick an image from camera roll"
-        />
+        /> */}
 
         <Button onPress={this._takePhoto} title="Take a photo" />
+
+        <Text>{this.state.username}</Text>
+
+        
 
         {this._maybeRenderImage()}
         {this._maybeRenderUploadingOverlay()}
@@ -147,11 +156,13 @@ class CameraScreen extends Component {
         uploadResult = await uploadResponse.json();
 
         this.setState({
-          image: uploadResult.location
+          image: uploadResult.location,
+          username: uploadResult.faces[0].id,
         });
 
         console.log({ uploadResponse });
         console.log({ uploadResult });
+        console.log(uploadResult.faces[0].id);
       }
     } catch (e) {
       console.log({ uploadResponse });
