@@ -230,12 +230,12 @@ class CameraScreen extends Component {
 
         this.setState({
           image: uploadResult.location,
-          username: uploadResult.faces[0].id,
+          username: uploadResult.faces[uploadResult.faces.length - 1].id,
         });
 
         console.log({ uploadResponse });
         console.log({ uploadResult });
-        console.log(uploadResult.faces[0].id);
+        console.log(uploadResult.faces[uploadResult.faces.length - 1].id);
       }
     } catch (e) {
       console.log({ uploadResponse });
