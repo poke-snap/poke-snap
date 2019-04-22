@@ -15,7 +15,7 @@ import { withNavigationFocus } from 'react-navigation';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
-class CameraScreen extends Component {
+class ProfileScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -329,4 +329,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigationFocus(CameraScreen);
+export default withNavigationFocus(ProfileScreen);
