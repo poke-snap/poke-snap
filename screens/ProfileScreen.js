@@ -16,6 +16,8 @@ import { withNavigationFocus } from 'react-navigation';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
+const UPDATE_ENDPOINT = 'https://frt4279bi3.execute-api.us-west-2.amazonaws.com/default/update-service';
+
 class ProfileScreen extends Component {
 
     constructor(props) {
@@ -105,7 +107,7 @@ class ProfileScreen extends Component {
                     title="Send a Poke!"
                 />
 
-                <Button onPress={this._getLocationAsync} title="Update Location" />
+                <Button onPress={this._updateLocationAsync} title="Update Location" />
 
                 <TextInput
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -121,6 +123,34 @@ class ProfileScreen extends Component {
             </View>
         );
     }
+
+    _updateLocationAsync = async () => {
+        console.log('updating location');
+        await this._getLocationAsync();
+
+        let token = await Notifications.getExpoPushTokenAsync();
+
+        let response = await fetch(UPDATE_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'multipart/form-data',
+            },
+            body: JSON.stringify({
+            //   key: {
+                username: this.state.username,
+                "expo-push-token": token,
+            //   },
+            //   value: {
+                location: this.state.location,
+            //   }
+            })
+          });
+
+        console.log({ response });
+    
+        return response;
+      }
 
     _getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);

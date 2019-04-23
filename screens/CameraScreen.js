@@ -15,6 +15,8 @@ import { withNavigationFocus } from 'react-navigation';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
+const UPDATE_ENDPOINT = 'https://frt4279bi3.execute-api.us-west-2.amazonaws.com/default/update-service';
+
 class CameraScreen extends Component {
 
   constructor(props) {
@@ -114,6 +116,27 @@ class CameraScreen extends Component {
         {this._maybeRenderUploadingOverlay()}
       </View>
     );
+  }
+
+  _updateLocationAsync = async () => {
+    await this._getLocationAsync();
+
+    return fetch(UPDATE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      body: JSON.stringify({
+        key: {
+          username: this.state.username,
+          token: token,
+        },
+        value: {
+          location: this.state.location,
+        }
+      })
+    });
   }
 
   _getLocationAsync = async () => {
