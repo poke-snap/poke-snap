@@ -7,12 +7,13 @@ import {
     Share,
     StatusBar,
     StyleSheet,
-    Text,
+    // Text,
     TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
@@ -87,7 +88,10 @@ class ProfileScreen extends Component {
         } = this.state;
 
         return (
-            <View style={styles.container}>
+            <Container>
+
+
+                {/* // <View style={styles.container}> */}
                 <StatusBar barStyle="default" />
 
                 {/* <Text
@@ -99,6 +103,24 @@ class ProfileScreen extends Component {
           onPress={this._pickImage}
           title="Pick an image from camera roll"
         /> */}
+
+                {/* <Container> */}
+                {/* <Header /> */}
+                <Content>
+                    <TouchableOpacity onPress={this._takePhoto}>
+                        <Card>
+                            <CardItem>
+                                <Icon active name="logo-googleplus" />
+                                <Text>Google Plus</Text>
+                                <Right>
+                                    <Icon name="arrow-forward" />
+                                </Right>
+                            </CardItem>
+                        </Card>
+                    </TouchableOpacity>
+
+                </Content>
+                {/* </Container> */}
 
                 <Button onPress={this._takePhoto} title="Take a photo" />
 
@@ -120,7 +142,7 @@ class ProfileScreen extends Component {
 
                 {this._maybeRenderImage()}
                 {this._maybeRenderUploadingOverlay()}
-            </View>
+            </Container>
         );
     }
 
@@ -133,24 +155,24 @@ class ProfileScreen extends Component {
         let response = await fetch(UPDATE_ENDPOINT, {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'multipart/form-data',
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
             body: JSON.stringify({
-            //   key: {
+                //   key: {
                 username: this.state.username,
                 "expo-push-token": token,
-            //   },
-            //   value: {
+                //   },
+                //   value: {
                 location: this.state.location,
-            //   }
+                //   }
             })
-          });
+        });
 
         console.log({ response });
-    
+
         return response;
-      }
+    }
 
     _getLocationAsync = async () => {
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -287,7 +309,7 @@ class ProfileScreen extends Component {
         console.log(this.state);
         console.log(this.state.username);
         let apiUrl = `http://ec2-34-209-142-12.us-west-2.compute.amazonaws.com/faces?id=${this.state.username}`;
-    
+
         // Note:
         // Uncomment this if you want to experiment with local server
         //
@@ -296,17 +318,17 @@ class ProfileScreen extends Component {
         // } else {
         //   apiUrl = `http://localhost:3000/upload`
         // }
-    
+
         let uriParts = uri.split('.');
         let fileType = uriParts[uriParts.length - 1];
-    
+
         let formData = new FormData();
         formData.append('file', {
             uri,
             name: `photo.${fileType}`,
             type: `image/${fileType}`,
         });
-    
+
         let options = {
             method: 'POST',
             body: formData,
@@ -315,7 +337,7 @@ class ProfileScreen extends Component {
                 'Content-Type': 'multipart/form-data',
             },
         };
-    
+
         return fetch(apiUrl, options);
     }
 }
