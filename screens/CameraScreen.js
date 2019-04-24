@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Button,
+  // Button,
   Clipboard,
   Image,
   Share,
   StatusBar,
   StyleSheet,
-  Text,
+  // Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import { Button, Container, Header, Content, Card, CardItem, Text, Input, Icon, Left, Body, Right } from 'native-base';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
 const UPDATE_ENDPOINT = 'https://frt4279bi3.execute-api.us-west-2.amazonaws.com/default/update-service';
@@ -51,7 +53,7 @@ class CameraScreen extends Component {
 
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
-    _ = await _getLocationAsync();
+    _ = await this._getLocationAsync();
 
     console.log(`[Token] ${token}`);
 
@@ -86,35 +88,46 @@ class CameraScreen extends Component {
     } = this.state;
 
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle="default" />
+      <Container>
+                <StatusBar barStyle="default" />
+                <Content>
 
-        {/* <Text
-          style={styles.exampleText}>
-          Example: Upload ImagePicker result
-        </Text> */}
+                    <TouchableOpacity onPress={this._takePhoto}>
+                        <Card style={{ backgroundColor: "#CCFFE6", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
+                            <CardItem style={{ backgroundColor: "#CCFFE6" }}>
+                                <Text style={{ fontFamily: "Roboto", fontSize: 64, fontWeight: "bold" }}>SNAP</Text>
+                                {/* <Icon active name="logo-googleplus" /> */}
+                            </CardItem>
+                            <CardItem cardBody style={{ backgroundColor: "#CCFFE6" }}>
+                                <AntDesign name="camerao" size={64} style={{ flexDirection: "row", justifyContent: "center" }} />
+                                {/* <Icon active name="logo-googleplus" /> */}
+                            </CardItem>
+                        </Card>
+                    </TouchableOpacity>
 
-        {/* <Button
-          onPress={this._pickImage}
-          title="Pick an image from camera roll"
-        /> */}
+                    <Card style={{ backgroundColor: "#CCFFE6", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
+                        <CardItem cardBody style={{ backgroundColor: "#CCFFE6" }}>
+                            <Text style={{ fontFamily: "Roboto", fontSize: 18, fontWeight: "bold" }}>{this.state.username}</Text>
+                        </CardItem>
+                    </Card>
 
-        <Button onPress={this._takePhoto} title="Take a photo" />
+                    <TouchableOpacity onPress={this.registerForPushNotificationsAsync}>
+                        <Card style={{ backgroundColor: "#FFFFCC", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
+                            <CardItem style={{ backgroundColor: "#FFFFCC" }}>
+                                <Text style={{ fontFamily: "Roboto", fontSize: 64, fontWeight: "bold" }}>POKE</Text>
+                                {/* <Icon active name="logo-googleplus" /> */}
+                            </CardItem>
+                            <CardItem cardBody style={{ backgroundColor: "#FFFFCC" }}>
+                                <FontAwesome name="hand-o-up" size={64} style={{ flexDirection: "row", justifyContent: "center" }} />
+                                {/* <Icon active name="logo-googleplus" /> */}
+                            </CardItem>
+                        </Card>
+                    </TouchableOpacity>
+                </Content>
 
-        <Button
-              onPress={this.registerForPushNotificationsAsync}
-              title="Send a Poke!"
-            />
-
-        <Button onPress={this._getLocationAsync} title="Update Location" />
-
-        <Text>{this.state.username}</Text>
-
-        
-
-        {this._maybeRenderImage()}
-        {this._maybeRenderUploadingOverlay()}
-      </View>
+                {this._maybeRenderImage()}
+                {this._maybeRenderUploadingOverlay()}
+            </Container>
     );
   }
 

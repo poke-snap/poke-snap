@@ -96,7 +96,7 @@ class ProfileScreen extends Component {
                     <TouchableOpacity onPress={this._takePhoto}>
                         <Card style={{ backgroundColor: "#CCFFE6", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
                             <CardItem style={{ backgroundColor: "#CCFFE6" }}>
-                                <Text style={{ fontFamily: "Roboto", fontSize: 64, fontWeight: "bold" }}>SNAP</Text>
+                                <Text style={{ fontFamily: "Roboto", fontSize: 64, fontWeight: "bold" }}>REGISTER</Text>
                                 {/* <Icon active name="logo-googleplus" /> */}
                             </CardItem>
                             <CardItem cardBody style={{ backgroundColor: "#CCFFE6" }}>
@@ -117,7 +117,7 @@ class ProfileScreen extends Component {
                         </CardItem>
                     </Card>
 
-                    <TouchableOpacity onPress={this.registerForPushNotificationsAsync}>
+                    <TouchableOpacity onPress={this._updateLocationAsync}>
                         <Card style={{ backgroundColor: "#FFFFCC", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
                             <CardItem style={{ backgroundColor: "#FFFFCC" }}>
                                 <Text style={{ fontFamily: "Roboto", fontSize: 64, fontWeight: "bold" }}>UPDATE</Text>
