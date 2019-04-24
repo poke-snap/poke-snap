@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     ActivityIndicator,
-    Button,
+    // Button,
     Clipboard,
     Image,
     Share,
@@ -13,8 +13,9 @@ import {
     View,
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
-import { Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
+import { Button, Container, Header, Content, Card, CardItem, Text, Icon, Right } from 'native-base';
 import { Constants, ImagePicker, Location, Permissions, Notifications } from 'expo';
+import { AntDesign } from '@expo/vector-icons';
 
 const PUSH_ENDPOINT = 'https://7v85kjq2jj.execute-api.us-west-2.amazonaws.com/default/poke-service';
 const UPDATE_ENDPOINT = 'https://frt4279bi3.execute-api.us-west-2.amazonaws.com/default/update-service';
@@ -108,13 +109,14 @@ class ProfileScreen extends Component {
                 {/* <Header /> */}
                 <Content>
                     <TouchableOpacity onPress={this._takePhoto}>
-                        <Card>
-                            <CardItem>
-                                <Icon active name="logo-googleplus" />
-                                <Text>Google Plus</Text>
-                                <Right>
-                                    <Icon name="arrow-forward" />
-                                </Right>
+                        <Card style={{ backgroundColor: "#CCFFE6", alignSelf: 'auto', alignItems: "center", justifyContent: "center" }}>
+                            <CardItem style={{ backgroundColor: "#CCFFE6" }}>
+                                <Text style={{fontFamily: "Roboto", fontSize: 48, fontWeight: "bold"}}>SNAP</Text>
+                                {/* <Icon active name="logo-googleplus" /> */}
+                            </CardItem>
+                            <CardItem cardBody style={{ backgroundColor: "#CCFFE6" }}>
+                                <AntDesign name="camerao" size={64} style={{ flexDirection: "row", justifyContent: "center" }} />
+                                {/* <Icon active name="logo-googleplus" /> */}
                             </CardItem>
                         </Card>
                     </TouchableOpacity>
